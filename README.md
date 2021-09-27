@@ -11,11 +11,3 @@
   - [About](#about)
 
 ## About
-
-
-- **Topics** needs to contain *in this order*
-  - git
-  - github
-  - metrics
-  - python
-  - software-engineering
