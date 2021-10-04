@@ -11,6 +11,7 @@ def get_args():
         usage="Calculates productivity measure of a git project.",
     )
     ap.add_argument("--jsonfile", "-j", required=True, type=open, help="...")
+    # ap.add_argument("--graph", "-g", type=open, help="...")
 
     args = ap.parse_args()
     return args
@@ -60,6 +61,8 @@ def main():
     output = [{'productivity':p, 'hash':h, 'day_since_0':d} for p,h,d in zip(prod,hash,days)]
     print(output)
     write(output)
+
+    # graph the sum with -g flag
 
 
 if __name__ == "__main__":
