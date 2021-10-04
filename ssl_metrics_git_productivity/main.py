@@ -26,19 +26,23 @@ def team_effort(data) -> int:
 
 
 def module_size(data) -> list:
-    return [commit["loc_sum"] for commit in data]
+    return [commit["delta_loc"] for commit in data]
+
+def get_hash(data) -> list:
+    return [commit["hash"] for commit in data]
+
+def get_date(data) -> list:
+    return [commit["commit_date"] for commit in data]
 
 
 def productivity(MS: list, TE: int) -> list:
     return [float(loc / TE) for loc in MS]
 
 
-def update(filename: str, data: list, name: str, field: list):
-    "adds the given field as key value pairs to json file"
+def write(data:list):
+    "adds the given field as key value pairs to prod.json"
 
-    for commit, item in zip(data, field):
-        commit[name] = item
-    with open(file=filename, mode="w") as file:
+    with open(file='prod.json', mode="w") as file:
         json.dump(data, file)
 
 
@@ -49,8 +53,12 @@ def main():
 
     data = get_data(jsonfile)
     prod = productivity(module_size(data), team_effort(data))
+    hash = get_hash(data)
+    date = get_date(data)
 
-    update(jsonfile, data, "productivity", prod)
+    output = [{'productivity':p, 'hash':h, 'commit_date':d} for p,h,d in zip(prod,hash,date)]
+    print(output)
+    write(output)
 
 
 if __name__ == "__main__":
