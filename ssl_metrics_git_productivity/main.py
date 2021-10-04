@@ -31,8 +31,8 @@ def module_size(data) -> list:
 def get_hash(data) -> list:
     return [commit["hash"] for commit in data]
 
-def get_date(data) -> list:
-    return [commit["commit_date"] for commit in data]
+def get_day(data) -> list:
+    return [commit["day_since_0"] for commit in data]
 
 
 def productivity(MS: list, TE: int) -> list:
@@ -54,9 +54,10 @@ def main():
     data = get_data(jsonfile)
     prod = productivity(module_size(data), team_effort(data))
     hash = get_hash(data)
-    date = get_date(data)
+    days = get_day(data)
+    print(data)
 
-    output = [{'productivity':p, 'hash':h, 'commit_date':d} for p,h,d in zip(prod,hash,date)]
+    output = [{'productivity':p, 'hash':h, 'day_since_0':d} for p,h,d in zip(prod,hash,days)]
     print(output)
     write(output)
 
