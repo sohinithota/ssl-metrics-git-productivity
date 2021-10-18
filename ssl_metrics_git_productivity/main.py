@@ -27,7 +27,7 @@ def team_effort(data) -> int:
 
 
 def module_size(data) -> list:
-    return [commit["delta_loc"] for commit in data]
+    return [abs(commit["delta_loc"]) for commit in data]
 
 def get_hash(data) -> list:
     return [commit["hash"] for commit in data]
@@ -59,7 +59,6 @@ def main():
     print(data)
 
     output = [{'productivity':p, 'hash':h, 'day_since_0':d} for p,h,d in zip(prod,hash,days)]
-    print(output)
     write(output)
 
     # graph the sum with -g flag
@@ -67,3 +66,19 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+'''
+issues
+
+prod per member as {author email, name}
+prod per member as a stacked bar chart
+
+prod as a line as a repo
+per member graphed on the same chart
+
+graphs of velocity and acceleration of prod
+
+
+'''
