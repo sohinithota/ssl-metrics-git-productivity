@@ -16,8 +16,8 @@ def get_args():
     args = ap.parse_args()
     return args
 
-
-def get_data(filename: str = "issues.json") -> list:
+# returns data from a loc.json file
+def get_data(filename: str) -> list:
     with open(file=filename, mode="r") as file:
         return json.load(file)
 
@@ -50,24 +50,21 @@ def write(data:list):
 def main():
 
     args = get_args()
-    jsonfile = args.jsonfile.name
-
-    data = get_data(jsonfile)
+    data = get_data(args.jsonfile.name)
     prod = productivity(module_size(data), team_effort(data))
     hash = get_hash(data)
     days = get_day(data)
-    print(data)
+
+    '''TODO
+    append prod to the data and return whole dataset
+    output = [... for ... in zip(prod,data)]
+    '''
 
     output = [{'productivity':p, 'hash':h, 'day_since_0':d} for p,h,d in zip(prod,hash,days)]
     write(output)
 
-    # graph the sum with -g flag
-
-
 if __name__ == "__main__":
     main()
-
-
 
 '''
 issues
