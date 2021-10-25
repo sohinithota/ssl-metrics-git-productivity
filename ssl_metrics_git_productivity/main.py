@@ -67,15 +67,8 @@ if __name__ == "__main__":
     main()
 
 '''
-issues
-
 prod per member as {author email, name}
-prod per member as a stacked bar chart
-
-prod as a line as a repo
-per member graphed on the same chart
+    prod per member graphed on the same chart
 
 graphs of velocity and acceleration of prod
-
-
 '''

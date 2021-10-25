@@ -61,20 +61,13 @@ def plot(df: DataFrame, filename: str) -> None:
     if args.window:
         window = [int(x) for x in args.window.split(',')]
         plt.xlim(*window)
-    plt.ylim([-1,max((unique_days.values()))+1])
+    plt.ylim([-1,max((unique_days.values()))*1.1])
 
     plt.ylabel("prod")
     plt.xlabel("day_since_0")
     plt.title("Daily Productivity Sum Over Time")
 
 
-    '''
-    plot works much better for expressing the data than bars do...
-    as xlim -> infinity, the bars become increasingly smaller
-    there is no good way to regulate the bars depending on the size of the graph
-    since coding a width is proportional to graph size could result in
-    overlapping bars
-    '''
     plt.plot(unique_days.keys(),unique_days.values())
     figure.savefig(filename)
 
